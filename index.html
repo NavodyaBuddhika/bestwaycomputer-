@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestway Computer Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #0066cc;
+            --secondary: #004080;
+            --accent: #ff6600;
+            --light: #f5f5f5;
+            --dark: #333;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #ff8533;
+            transform: translateY(-3px);
+        }
+        
+        /* Featured Products */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-desc {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .service-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 3rem 0;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-text h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+            padding: 3rem 0;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info, .contact-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h3, .contact-form h3 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-icon {
+            margin-right: 1rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-img {
+                order: 2;
+            }
+            
+            .about-text {
+                order: 1;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            nav ul li {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    BESTWAY <span>COMPUTERS</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Your Technology Partner</h1>
+                <p>Discover the latest computers and accessories at Bestway Computers. Quality products, expert service, and competitive prices.</p>
+                <a href="#products" class="btn">Explore Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <div class="products">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/280/200" alt="Gaming Laptop">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gaming Laptop Pro X</h3>
+                        <p class="product-price">$1,299.99</p>
+                        <p class="product-desc">High-performance gaming laptop with RTX graphics, 16GB RAM, and 1TB SSD storage.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/280/200" alt="Desktop Computer">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Business Desktop i7</h3>
+                        <p class="product-price">$899.99</p>
+                        <p class="product-desc">Powerful desktop computer with Intel i7 processor, perfect for office and professional work.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/280/200" alt="Monitor">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Ultra HD Monitor 27"</h3>
+                        <p class="product-price">$349.99</p>
+                        <p class="product-desc">4K Ultra HD monitor with vibrant colors and eye-comfort technology for professional use.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="/api/placeholder/280/200" alt="Accessories">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Gaming Accessories Bundle</h3>
+                        <p class="product-price">$129.99</p>
+                        <p class="product-desc">Complete gaming set with RGB keyboard, mouse, and high-quality headphones.</p>
+                        <a href="#" class="btn">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#" class="btn">View All Products</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">Our Services</h2>
+            <div class="service-cards">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3 class="service-title">Computer Repair</h3>
+                    <p>Professional repair services for all brands of computers, laptops and peripherals.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3 class="service-title">System Upgrade</h3>
+                    <p>Enhance your computer's performance with our professional upgrade services.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3 class="service-title">Data Recovery</h3>
+                    <p>Recover your important files and data from damaged or corrupted storage devices.</p>
+                </div>
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">🖥️</div>
+                    <h3 class="service-title">Custom PC Building</h3>
+                    <p>Get a custom-built PC that perfectly matches your specific requirements and budget.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-img">
+                    <img src="/api/placeholder/500/400" alt="About Bestway Computers">
+                </div>
+                <div class="about-text">
+                    <h2>About Bestway Computers</h2>
+                    <p>Welcome to Bestway Computers, your trusted partner for all your technology needs. Established in 2010, we have been serving customers with quality computer products and exceptional service.</p>
+                    <p>At Bestway Computers, we pride ourselves on our knowledgeable staff, competitive prices, and wide range of products from leading brands. Whether you need a new laptop, desktop computer, accessories, or expert repair services, we've got you covered.</p>
+                    <p>Our mission is to provide reliable technology solutions that help our customers achieve their goals, whether for work, education, or entertainment.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>123 Tech Street, Colombo, Sri Lanka</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>+94 11 234 5678</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>+94 77 123 4567</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>info@bestwaycomputers.com</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <strong>Working Hours:</strong><br>
+                            Monday - Saturday: 9AM - 6PM<br>
+                            Sunday: Closed
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Bestway Computers</h4>
+                    <p>Your trusted technology partner offering quality products and exceptional service since 2010.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Laptops</a></li>
+                        <li><a href="#">Desktop PCs</a></li>
+                        <li><a href="#">Monitors</a></li>
+                        <li><a href="#">Accessories</a></li>
+                        <li><a href="#">Network Devices</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Returns Policy</a></li>
+                        <li><a href="#">Warranty Info</a></li>
+                        <li><a href="#">Shipping Details</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Bestway Computers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Basic JavaScript for interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Simple form validation
+            const contactForm = document.querySelector('.contact-form form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    
+                    if (name && email && message) {
+                        alert('Thank you for your message! We will get back to you soon.');
+                        contactForm.reset();
+                    } else {
+                        alert('Please fill in all required fields.');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
